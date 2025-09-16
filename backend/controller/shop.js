@@ -48,7 +48,7 @@ router.post(
 
       // ✅ Generate activation token
       const activationToken = createActivationToken(seller);
-      const activationUrl = `https://multivender-kzk1.vercel.app/seller/activation/${activationToken}`;
+      const activationUrl = `https://e-shop-zeta-indol.vercel.app/seller/activation/${activationToken}`;
 
       // ✅ Send activation mail
       await sendMail({

@@ -44,7 +44,7 @@ router.post("/create-user", async (req, resp, next) => {
 
     // ✅ Generate activation token
     const activationToken = createActivationToken(user);
-    const activationUrl = `https://multivender-kzk1.vercel.app/activation/${activationToken}`;
+    const activationUrl = `https://e-shop-zeta-indol.vercel.app/activation/${activationToken}`;
 
     // ✅ Send activation email
     await sendMail({
