@@ -17,7 +17,7 @@ app.use(
 );
 app.use("/", express.static(path.join(__dirname, "./uploads")));
 app.use("/test", (req, resp) => {
-  resp.send("Hello !");
+  resp.send("Hello Api Tested!");
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
