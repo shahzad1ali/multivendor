@@ -183,7 +183,7 @@ router.post(
 
       // Set CORS and cache headers
       res.set({
-        "Access-Control-Allow-Origin": "https://multivender-kzk1.vercel.app",
+        "Access-Control-Allow-Origin": "https://e-shop-zeta-indol.vercel.app",
         "Access-Control-Allow-Credentials": "true",
         "Cache-Control": "no-store, no-cache, must-revalidate, private",
       });
