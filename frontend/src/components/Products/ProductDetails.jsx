@@ -30,6 +30,7 @@ const ProductDetails = ({ data }) => {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getAllProductsShop(data?.shop?._id));
@@ -41,10 +42,16 @@ const ProductDetails = ({ data }) => {
     // eslint-disable-next-line
   }, [wishList, data]);
 
-  const shopAvatarUrl = data?.shop?.avatar
-    ? `${backend_url}/${data.shop.avatar.url}`
-    : `${process.env.PUBLIC_URL}/images/default-avatar.png`;
+  // const shopAvatarUrl = data?.shop?.avatar
+  //   ? `${backend_url}/${data.shop.avatar.url}`
+  //   : `${process.env.PUBLIC_URL}/images/default-avatar.png`;
+      const { seller } = useSelector((state) => state.seller);
 
+    const avatarUrl = seller?.avatar?.url;
+    const shopAvatarUrl =
+      avatarUrl && !avatarUrl.startsWith("http")
+        ? `${backend_url}${avatarUrl.startsWith("/") ? "" : "/"}${avatarUrl}`
+        : avatarUrl || null;
   function increment() {
     setCount(count + 1);
   }
@@ -268,7 +275,13 @@ const ProductDetailsInfo = ({
   avgRating,
 }) => {
   const [active, setActive] = useState(1);
-  console.log(data);
+    const { seller } = useSelector((state) => state.seller);
+
+    const avatarUrl = seller?.avatar?.url;
+    const shopAvatarUrl =
+      avatarUrl && !avatarUrl.startsWith("http")
+        ? `${backend_url}${avatarUrl.startsWith("/") ? "" : "/"}${avatarUrl}`
+        : avatarUrl || null;
   return (
     <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded h-full">
       {/* HEADINGS */}
@@ -347,7 +360,7 @@ const ProductDetailsInfo = ({
             <Link to={`/shop/preview/${data.shop._id}`}>
               <div className="flex items-center">
                 <img
-                  src={`${backend_url}/${data?.shop?.avatar?.url}`}
+                  src={shopAvatarUrl}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />
