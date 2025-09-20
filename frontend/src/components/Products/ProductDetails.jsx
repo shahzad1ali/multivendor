@@ -146,7 +146,7 @@ const ProductDetails = ({ data }) => {
                           } cursor-pointer m-2 flex-shrink-0`}
                         >
                           <img
-                            src={`${backend_url}/${i}`}
+                            src={imageUrl}
                             alt={`image-${index}`}
                             className="h-[200px] w-[200px] object-contain"
                             onClick={() => setSelect(index)}
