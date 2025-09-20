@@ -7,7 +7,8 @@ const Event = require("../model/event");
 const { upload } = require("../multer");
 const { isSeller } = require("../middleware/auth");
 const fs = require("fs");
-const path = require("path"); 
+const path = require("path");
+const cloudinary = require('cloudinary')
 
 // create event
 router.post(
@@ -21,22 +22,59 @@ router.post(
         return next(new ErrorHandler("Shop Id is invalid!", 400));
       } else {
         const files = req.files;
-        const imageUrls = files.map((file) => `${file.filename}`);
+        let imageUrls = [];
+
+        for (const file of files) {
+          const result = await cloudinary.uploader.upload(file.path, {
+            folder: "events",
+          });
+          imageUrls.push(result.secure_url);
+        }
+
         const eventData = req.body;
         eventData.images = imageUrls;
         eventData.shop = shop;
 
-        const product = await Event.create(eventData);
+        const event = await Event.create(eventData);
         res.status(201).json({
           success: true,
-          product,
+          event,
         });
       }
     } catch (error) {
-      return next(new ErrorHandler(error, 400));
+      return next(new ErrorHandler(error.message, 400));
     }
   })
 );
+
+
+// router.post(
+//   "/create-event",
+//   upload.array("images"),
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const shopId = req.body.shopId;
+//       const shop = await Shop.findById(shopId);
+//       if (!shop) {
+//         return next(new ErrorHandler("Shop Id is invalid!", 400));
+//       } else {
+//         const files = req.files;
+//         const imageUrls = files.map((file) => `${file.filename}`);
+//         const eventData = req.body;
+//         eventData.images = imageUrls;
+//         eventData.shop = shop;
+
+//         const product = await Event.create(eventData);
+//         res.status(201).json({
+//           success: true,
+//           product,
+//         });
+//       }
+//     } catch (error) {
+//       return next(new ErrorHandler(error, 400));
+//     }
+//   })
+// );
 
 // GET ALL EVENTS 
 

@@ -11,9 +11,11 @@ const EventCard = ({ active, data }) => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const imageUrl = data?.images?.[0]
-    ? `${backend_url}/${data.images[0]}`
-    : "/placeholder.png";
+  // const imageUrl = data?.images?.[0]
+  //   ? `${backend_url}/${data.images[0]}`
+  //   : "/placeholder.png";
+
+  const imageUrl = data?.images?.[0] || "";
 
   const addtoCartHandler = (id) => {
     const isItemExists = cart && cart.find((i) => i._id === data._id);

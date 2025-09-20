@@ -76,9 +76,11 @@ const ProductDetails = ({ data }) => {
       toast.error("Please login to countinue.");
     }
   };
-  const imageUrl = data?.images[select]
-    ? `${backend_url}/${data.images[select]}`
-    : "";
+  // const imageUrl = data?.images[select]
+  //   ? `${backend_url}/${data.images[select]}`
+  //   : "";
+
+  const imageUrl = data?.images?.[0] || "";
 
   const removeFromWishListHandler = (data) => {
     setClick(!click);
