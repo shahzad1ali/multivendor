@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { categoriesData } from "../../static/data";
 import Cart from "../Cart/Cart";
 import Wish from "../Wishlist/Wishlist.jsx";
-import { backend_url } from "../../server.js";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
@@ -35,6 +34,7 @@ const Header = ({ activeHeading }) => {
   const [openwish, setOpenWish] = useState(false);
   const [open, setOpen] = useState(false);
   // console.log("User from Redux:", user);
+
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
