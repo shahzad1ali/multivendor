@@ -16,6 +16,7 @@ import DropDown from "./DropDown";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
+import { backend_url } from "../../server.js";
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -102,7 +103,7 @@ const Header = ({ activeHeading }) => {
                     >
                       <div className="w-full flex items-start py-3">
                         <img
-                          src={`${i.images[0].url}`}
+                          src={`${backend_url}/${i.images[0].url}`}
                           className="w-[40px] h-[40px] mr-[10px] object-cover"
                           alt={i.name}
                         />
